@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/general_string_home" />
+        <item
+            android:id="@+id/nav_add_user"
+            android:icon="@drawable/ic_person_add_black_24dp"
+            android:title="@string/general_string_agregar" />
+        <item
+            android:id="@+id/nav_delete_user"
+            android:icon="@drawable/ic_delete_black_24dp"
+            android:title="@string/general_string_eliminar" />
+        <item
+            android:id="@+id/nav_update_user"
+            android:icon="@drawable/ic_update_black_24dp"
+            android:title="@string/general_string_modificar" />
+    </group>
+
+</menu>

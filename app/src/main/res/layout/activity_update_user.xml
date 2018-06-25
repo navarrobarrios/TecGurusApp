@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddUserActivity">
+
+    <EditText
+        android:id="@+id/update_user_activity_username"
+        android:layout_marginTop="8dp"
+        android:hint="@string/general_string_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/update_user_activity_content_layout"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/update_user_activity_password"
+            android:layout_marginTop="8dp"
+            android:hint="@string/general_string_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/update_user_activity_confirm_password"
+            android:layout_marginTop="8dp"
+            android:hint="@string/general_string_confirmar_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/update_user_activity_name"
+            android:layout_marginTop="8dp"
+            android:hint="@string/general_string_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/update_user_activity_lastname"
+            android:layout_marginTop="8dp"
+            android:hint="@string/general_string_apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/update_user_activity_address"
+            android:layout_marginTop="8dp"
+            android:hint="@string/general_string_direccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/update_user_activity_edit_button"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFF"
+            android:text="@string/general_string_modificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/update_user_activity_search_button"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFF"
+        android:text="@string/general_string_buscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

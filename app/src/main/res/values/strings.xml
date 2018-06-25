@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">TecGurusApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Tec Gurus</string>
+    <string name="nav_header_subtitle">www.tecgurus.net</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_splash">Splash</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="tec_gurus">Tec Gurus</string>
+    <string name="general_string_home">Home</string>
+    <string name="general_string_eliminar">Eliminar</string>
+    <string name="general_string_modificar">Modificar</string>
+    <string name="general_string_username">Username</string>
+    <string name="general_string_password">Password</string>
+    <string name="general_string_nombre">Nombre</string>
+    <string name="general_string_apellido">Apellido</string>
+    <string name="general_string_direccion">Direccion</string>
+    <string name="general_string_agregar">Agregar</string>
+    <string name="delete_user_instructions">Escribe el username del usuario</string>
+    <string name="general_string_buscar">Buscar</string>
+    <string name="general_string_confirmar_password">Confirmar passowrd</string>
+
+    <string name="error_field_requiered">*Campo requerido</string>
+    <string name="error_incorrect_confirmation">Los campos no coinciden</string>
+
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddUserActivity">
+
+    <EditText
+        android:id="@+id/add_user_activity_username"
+        android:layout_marginTop="8dp"
+        android:hint="@string/general_string_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/add_user_activity_password"
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp"
+        android:hint="@string/general_string_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/add_user_activity_confirm_password"
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp"
+        android:hint="@string/general_string_confirmar_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/add_user_activity_name"
+        android:layout_marginTop="8dp"
+        android:hint="@string/general_string_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/add_user_activity_lastname"
+        android:layout_marginTop="8dp"
+        android:hint="@string/general_string_apellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/add_user_activity_address"
+        android:layout_marginTop="8dp"
+        android:hint="@string/general_string_direccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/add_user_activity_add_button"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFF"
+        android:text="@string/general_string_agregar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
