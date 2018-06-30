@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import net.tecgurus.app.tecgurusapp.R;
 import net.tecgurus.app.tecgurusapp.db.beans.UserBean;
+import net.tecgurus.app.tecgurusapp.db.helpers.UserHelper;
 import net.tecgurus.app.tecgurusapp.utils.ValidationsUtils;
 
 public class UpdateUserActivity extends AppCompatActivity {
@@ -30,7 +32,6 @@ public class UpdateUserActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mUsername = findViewById(R.id.update_user_activity_username);
         mPassword = findViewById(R.id.update_user_activity_password);
         mConfirmPassword = findViewById(R.id.update_user_activity_confirm_password);
@@ -50,6 +51,9 @@ public class UpdateUserActivity extends AppCompatActivity {
                         mSearchButton.setVisibility(View.GONE);
                         mUsername.setEnabled(false);
                     }else{
+                        Toast.makeText(UpdateUserActivity.this,
+                                String.format(getString(R.string.the_username_not_exists), mUsername.getText().toString()),
+                                Toast.LENGTH_SHORT).show();
                         mUsername.setEnabled(true);
                         mSearchButton.setVisibility(View.VISIBLE);
                         mContentLayout.setVisibility(View.GONE);
@@ -62,7 +66,17 @@ public class UpdateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validateFields()){
-                    //TODO update on database
+                    UserBean userBean = new UserBean();
+                    userBean.setUsername(mUsername.getText().toString());
+                    userBean.setPassword(mPassword.getText().toString());
+                    userBean.setName(mName.getText().toString());
+                    userBean.setLastname(mLastName.getText().toString());
+                    userBean.setAddress(mAddress.getText().toString());
+                    UserHelper.getInstance(getApplicationContext()).update(userBean);
+                    Toast.makeText(UpdateUserActivity.this,
+                            String.format(getString(R.string.user_updated_success),
+                            userBean.getUsername()), Toast.LENGTH_SHORT).show();
+                    UpdateUserActivity.this.finish();
                 }
             }
         });
@@ -71,13 +85,20 @@ public class UpdateUserActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
-            super.onBackPressed();
+            onBackPressed();
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        UpdateUserActivity.this.finish();
+        if (mSearchButton.getVisibility() == View.VISIBLE){
+            UpdateUserActivity.this.finish();
+        }else{
+            mUsername.setText(null);
+            mUsername.setEnabled(true);
+            mSearchButton.setVisibility(View.VISIBLE);
+            mContentLayout.setVisibility(View.GONE);
+        }
     }
 
     //endregion
@@ -85,9 +106,17 @@ public class UpdateUserActivity extends AppCompatActivity {
     //region Local Methods
     private boolean isOnDatabase(){
         String username = mUsername.getText().toString();
-        UserBean userBean = new UserBean();
-        //TODO get from database
-        return true;
+        UserBean userBean = UserHelper.getInstance(getApplicationContext()).getUserByUsername(username);
+        if (userBean != null){
+            mPassword.setText(userBean.getPassword());
+            mConfirmPassword.setText(userBean.getPassword());
+            mName.setText(userBean.getName());
+            mLastName.setText(userBean.getLastname());
+            mAddress.setText(userBean.getAddress());
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

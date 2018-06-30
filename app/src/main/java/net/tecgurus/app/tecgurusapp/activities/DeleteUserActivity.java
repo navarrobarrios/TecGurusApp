@@ -6,8 +6,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import net.tecgurus.app.tecgurusapp.R;
+import net.tecgurus.app.tecgurusapp.db.helpers.UserHelper;
 import net.tecgurus.app.tecgurusapp.utils.ValidationsUtils;
 
 public class DeleteUserActivity extends AppCompatActivity {
@@ -29,8 +31,14 @@ public class DeleteUserActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ValidationsUtils.isEmpty(mUsername, getApplicationContext())){
-                    //TODO delete user
+                if (!ValidationsUtils.isEmpty(mUsername, getApplicationContext())){
+                    String username = mUsername.getText().toString();
+                    if (existUser(username)){
+                        deleteUser(username);
+                    }else{
+                        Toast.makeText(DeleteUserActivity.this,
+                                String.format(getString(R.string.the_username_not_exists), username), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -44,4 +52,19 @@ public class DeleteUserActivity extends AppCompatActivity {
     }
 
     //endregion
+
+    //region Local Methods
+    private boolean existUser(String username){
+        return UserHelper.getInstance(getApplicationContext()).getUserByUsername(username) != null;
+    }
+
+    private void deleteUser(String username){
+        UserHelper.getInstance(getApplicationContext()).deleteUserByUsername(username);
+        Toast.makeText(this,
+                String.format(getString(R.string.user_deleted_success), username),
+                Toast.LENGTH_SHORT).show();
+        DeleteUserActivity.this.finish();
+    }
+    //endregion
+
 }

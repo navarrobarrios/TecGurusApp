@@ -1,5 +1,10 @@
 package net.tecgurus.app.tecgurusapp.db.beans;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import net.tecgurus.app.tecgurusapp.db.helpers.UserHelper;
+
 public class UserBean {
     //region Variables
     private String username;
@@ -23,6 +28,52 @@ public class UserBean {
         this.address = address;
     }
 
+    public UserBean(Cursor cursor) {
+        if (cursor.getColumnIndex(UserHelper.FIELD_USERNAME) != -1){
+            this.username = cursor.getString(cursor.getColumnIndex(UserHelper.FIELD_USERNAME));
+        }
+        if (cursor.getColumnIndex(UserHelper.FIELD_PASSWORD) != -1){
+            this.password = cursor.getString(cursor.getColumnIndex(UserHelper.FIELD_PASSWORD));
+        }
+        if (cursor.getColumnIndex(UserHelper.FIELD_NAME) != -1){
+            this.name = cursor.getString(cursor.getColumnIndex(UserHelper.FIELD_NAME));
+        }
+        if (cursor.getColumnIndex(UserHelper.FIELD_LASTNAME) != -1){
+            this.lastname = cursor.getString(cursor.getColumnIndex(UserHelper.FIELD_LASTNAME));
+        }
+        if (cursor.getColumnIndex(UserHelper.FIELD_ADDRESS) != -1){
+            this.address = cursor.getString(cursor.getColumnIndex(UserHelper.FIELD_ADDRESS));
+        }
+    }
+
+    //endregion
+
+    //region Local Methods
+
+    @Override
+    public String toString() {
+        return String.format(
+                "username: %s\n" +
+                        "password: %s\n" +
+                        "name: %s\n" +
+                        "last_name:%s\n" +
+                        "address: %s",
+                this.username,
+                this.password,
+                this.name,
+                this.lastname,
+                this.address);
+    }
+
+    public ContentValues toContentValues(){
+        ContentValues userContentValues = new ContentValues();
+        userContentValues.put(UserHelper.FIELD_USERNAME, getUsername());
+        userContentValues.put(UserHelper.FIELD_PASSWORD, getPassword());
+        userContentValues.put(UserHelper.FIELD_NAME, getName());
+        userContentValues.put(UserHelper.FIELD_LASTNAME, getLastname());
+        userContentValues.put(UserHelper.FIELD_ADDRESS, getAddress());
+        return userContentValues;
+    }
     //endregion
 
     //region Setters & Getters

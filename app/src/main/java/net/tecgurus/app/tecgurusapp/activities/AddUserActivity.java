@@ -6,13 +6,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import net.tecgurus.app.tecgurusapp.R;
 import net.tecgurus.app.tecgurusapp.db.beans.UserBean;
+import net.tecgurus.app.tecgurusapp.db.helpers.UserHelper;
 import net.tecgurus.app.tecgurusapp.utils.ValidationsUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddUserActivity extends AppCompatActivity{
 
@@ -98,11 +97,9 @@ public class AddUserActivity extends AppCompatActivity{
     }
 
     private void saveOnDatabase(UserBean userBean){
-        //TODO save to database
-    }
-
-    private List<UserBean> getUsers(){
-        return new ArrayList<>();
+        UserHelper.getInstance(getApplicationContext()).save(userBean);
+        Toast.makeText(this, getString(R.string.user_saved_success), Toast.LENGTH_LONG).show();
+        this.finish();
     }
     //endregion
 

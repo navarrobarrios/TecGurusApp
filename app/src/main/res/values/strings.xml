@@ -22,9 +22,15 @@
     <string name="general_string_agregar">Agregar</string>
     <string name="delete_user_instructions">Escribe el username del usuario</string>
     <string name="general_string_buscar">Buscar</string>
-    <string name="general_string_confirmar_password">Confirmar passowrd</string>
+    <string name="general_string_confirmar_password">Confirmar password</string>
+    <string name="the_username_not_exists">El usuario %s no existe.</string>
+    <string name="user_updated_success">El usuario %s ha sido actualizado con exito.</string>
+    <string name="user_deleted_success">El usuario %s ha sido eliminado con exito.</string>
 
     <string name="error_field_requiered">*Campo requerido</string>
     <string name="error_incorrect_confirmation">Los campos no coinciden</string>
+    <string name="user_saved_success">Usuario guardado satisfactoriamente!</string>
+
+    <string name="data_base_table_user" translatable="false">CREATE TABLE IF NOT EXISTS user(username TEXT PRIMARY KEY, password TEXT, name TEXT, last_name TEXT, address TEXT)</string>
 
 </resources>
