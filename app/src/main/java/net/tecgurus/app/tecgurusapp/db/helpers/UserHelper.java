@@ -12,6 +12,9 @@ import android.util.Log;
 import net.tecgurus.app.tecgurusapp.db.beans.UserBean;
 import net.tecgurus.app.tecgurusapp.db.core.DataSQLite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserHelper {
     //region Variables
     //region DATABASE FIELDS
@@ -90,6 +93,26 @@ public class UserHelper {
         }catch (IllegalStateException e){
             e.printStackTrace();
         }
+    }
+
+    public List<UserBean> getUsers(){
+        List<UserBean> userBeans = new ArrayList<>();
+        SQLiteDatabase readableDatabase = mHelper.getReadableDatabase();
+        @SuppressLint("Recycle") final Cursor cursor = readableDatabase.query(TABLE_NAME,
+                null,null, null, null, null, null);
+        try{
+            if (cursor != null){
+                while (cursor.moveToNext()){
+                    userBeans.add(new UserBean(cursor));
+                }
+            }
+        }catch (SQLiteConstraintException | IllegalStateException e){
+            e.printStackTrace();
+        }finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return userBeans;
     }
     //endregion
 

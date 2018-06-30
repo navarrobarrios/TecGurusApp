@@ -17,6 +17,9 @@ import net.tecgurus.app.tecgurusapp.utils.ValidationsUtils;
 public class UpdateUserActivity extends AppCompatActivity {
 
     //region Variables
+    //region Static Variables
+    public static final String KEY_USERNAME = "key_to_user_bean";
+    //endregion
     //region Views
     private EditText mUsername, mPassword, mConfirmPassword, mName, mLastName, mAddress;
     private Button mSearchButton;
@@ -46,18 +49,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!ValidationsUtils.isEmpty(mUsername, getApplicationContext())){
-                    if (isOnDatabase()){
-                        mContentLayout.setVisibility(View.VISIBLE);
-                        mSearchButton.setVisibility(View.GONE);
-                        mUsername.setEnabled(false);
-                    }else{
-                        Toast.makeText(UpdateUserActivity.this,
-                                String.format(getString(R.string.the_username_not_exists), mUsername.getText().toString()),
-                                Toast.LENGTH_SHORT).show();
-                        mUsername.setEnabled(true);
-                        mSearchButton.setVisibility(View.VISIBLE);
-                        mContentLayout.setVisibility(View.GONE);
-                    }
+                   validateUser();
                 }
             }
         });
@@ -80,6 +72,8 @@ public class UpdateUserActivity extends AppCompatActivity {
                 }
             }
         });
+
+        checkIfHasUsername();
     }
 
     @Override
@@ -91,19 +85,46 @@ public class UpdateUserActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mSearchButton.getVisibility() == View.VISIBLE){
-            UpdateUserActivity.this.finish();
+        if (getIntent() != null && getIntent().hasExtra(KEY_USERNAME)){
+            this.finish();
         }else{
-            mUsername.setText(null);
-            mUsername.setEnabled(true);
-            mSearchButton.setVisibility(View.VISIBLE);
-            mContentLayout.setVisibility(View.GONE);
+            if (mSearchButton.getVisibility() == View.VISIBLE){
+                UpdateUserActivity.this.finish();
+            }else{
+                mUsername.setText(null);
+                mUsername.setEnabled(true);
+                mSearchButton.setVisibility(View.VISIBLE);
+                mContentLayout.setVisibility(View.GONE);
+            }
         }
     }
 
     //endregion
 
     //region Local Methods
+    private void checkIfHasUsername(){
+        if (getIntent() != null && getIntent().hasExtra(KEY_USERNAME)){
+            String username = getIntent().getStringExtra(KEY_USERNAME);
+            mUsername.setText(username);
+            validateUser();
+        }
+    }
+
+    private void validateUser(){
+        if (isOnDatabase()){
+            mContentLayout.setVisibility(View.VISIBLE);
+            mSearchButton.setVisibility(View.GONE);
+            mUsername.setEnabled(false);
+        }else{
+            Toast.makeText(UpdateUserActivity.this,
+                    String.format(getString(R.string.the_username_not_exists), mUsername.getText().toString()),
+                    Toast.LENGTH_SHORT).show();
+            mUsername.setEnabled(true);
+            mSearchButton.setVisibility(View.VISIBLE);
+            mContentLayout.setVisibility(View.GONE);
+        }
+    }
+
     private boolean isOnDatabase(){
         String username = mUsername.getText().toString();
         UserBean userBean = UserHelper.getInstance(getApplicationContext()).getUserByUsername(username);

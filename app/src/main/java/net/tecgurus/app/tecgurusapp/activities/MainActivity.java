@@ -3,6 +3,8 @@ package net.tecgurus.app.tecgurusapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,11 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.squareup.picasso.Picasso;
 
 import net.tecgurus.app.tecgurusapp.R;
+import net.tecgurus.app.tecgurusapp.adapters.UserAdapter;
+import net.tecgurus.app.tecgurusapp.db.beans.UserBean;
+import net.tecgurus.app.tecgurusapp.db.helpers.UserHelper;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,8 +33,11 @@ public class MainActivity extends AppCompatActivity
 
     //region Variables
     private NavigationView mNavigationView;
+    private LinearLayout mNoDataFoundLayout;
+    private RecyclerView mDataLayout;
     //endregion
 
+    //region Activity Methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +45,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mDataLayout = findViewById(R.id.content_main_recycler);
+        mNoDataFoundLayout = findViewById(R.id.content_main_users_not_found);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -54,8 +67,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        inflateViews();
+    }
+
+    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -84,7 +103,9 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+    //endregion
 
+    //region NavigationView Methods
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -114,4 +135,22 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    //endregion
+
+    //region Local Methods
+    private void inflateViews(){
+        List<UserBean> userBeans =
+                UserHelper.getInstance(getApplicationContext()).getUsers();
+        if (userBeans.size() == 0){
+            mNoDataFoundLayout.setVisibility(View.VISIBLE);
+            mDataLayout.setVisibility(View.GONE);
+        }else{
+            mNoDataFoundLayout.setVisibility(View.GONE);
+            mDataLayout.setVisibility(View.VISIBLE);
+            UserAdapter adapter = new UserAdapter(userBeans, getApplicationContext());
+            mDataLayout.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            mDataLayout.setAdapter(adapter);
+        }
+    }
+    //endregion
 }
