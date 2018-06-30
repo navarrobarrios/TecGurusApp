@@ -3,6 +3,7 @@ package net.tecgurus.app.tecgurusapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity
             mDataLayout.setVisibility(View.VISIBLE);
             UserAdapter adapter = new UserAdapter(userBeans, getApplicationContext());
             mDataLayout.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//            mDataLayout.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1)); /*Con este Layoutmanager puedes agregar mas de uno item por fila*/
             mDataLayout.setAdapter(adapter);
         }
     }
