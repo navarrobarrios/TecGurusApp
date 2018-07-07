@@ -20,6 +20,14 @@
             android:id="@+id/nav_update_user"
             android:icon="@drawable/ic_update_black_24dp"
             android:title="@string/general_string_modificar" />
+        <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_account_box_black_24dp"
+            android:title="@string/general_string_contacts" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_account_box_black_24dp"
+            android:title="Map" />
     </group>
 
 </menu>

@@ -14,6 +14,7 @@
     <string name="general_string_home">Home</string>
     <string name="general_string_eliminar">Eliminar</string>
     <string name="general_string_modificar">Modificar</string>
+    <string name="general_string_contacts">Contactos</string>
     <string name="general_string_username">Username</string>
     <string name="general_string_password">Password</string>
     <string name="general_string_nombre">Nombre</string>
@@ -33,5 +34,6 @@
 
     <string name="data_base_table_user" translatable="false">CREATE TABLE IF NOT EXISTS user(username TEXT PRIMARY KEY, password TEXT, name TEXT, last_name TEXT, address TEXT)</string>
     <string name="registers_not_found">No existen registros aun.</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

@@ -132,6 +132,18 @@ public class MainActivity extends AppCompatActivity
                 mNavigationView.setCheckedItem(R.id.nav_home);
                 drawer.closeDrawer(Gravity.START);
                 return false;
+            case R.id.nav_contacts:
+                Intent myContactsActiviy = new Intent(getApplicationContext(), MyContactsActivity.class);
+                startActivity(myContactsActiviy);
+                mNavigationView.setCheckedItem(R.id.nav_home);
+                drawer.closeDrawer(Gravity.START);
+                return false;
+            case R.id.nav_map:
+                Intent mapActivity = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(mapActivity);
+                mNavigationView.setCheckedItem(R.id.nav_home);
+                drawer.closeDrawer(Gravity.START);
+                return false;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -140,6 +152,7 @@ public class MainActivity extends AppCompatActivity
 
     //region Local Methods
     private void inflateViews(){
+
         List<UserBean> userBeans =
                 UserHelper.getInstance(getApplicationContext()).getUsers();
         if (userBeans.size() == 0){
