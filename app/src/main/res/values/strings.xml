@@ -35,5 +35,17 @@
     <string name="data_base_table_user" translatable="false">CREATE TABLE IF NOT EXISTS user(username TEXT PRIMARY KEY, password TEXT, name TEXT, last_name TEXT, address TEXT)</string>
     <string name="registers_not_found">No existen registros aun.</string>
     <string name="title_activity_maps">Map</string>
+    <string name="get_information_text">Obtener Informacion</string>
+    <string name="version_info">Informacion de la version:</string>
+    <string name="map_text">Map</string>
+    <string name="web_services_text">Web Services</string>
+    <string name="info_getted">Informacion obtenida</string>
+    <string name="no_data_found">No se encontro información</string>
+    <string name="bad_internet_connection">Revisa tu conexión a internet</string>
+    <string name="invalid_params">Inserta un codigo valido</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_title">Reloj Tec Gurus</string>
+    <string name="address_tec_gurus">Direccion tec gurus</string>
 
 </resources>

@@ -27,7 +27,15 @@
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_account_box_black_24dp"
-            android:title="Map" />
+            android:title="@string/map_text" />
+        <item
+            android:id="@+id/nav_web_services"
+            android:icon="@drawable/ic_web_black_24dp"
+            android:title="@string/web_services_text" />
+        <item
+            android:id="@+id/nav_go_to_tec_gurus"
+            android:icon="@drawable/ic_web_black_24dp"
+            android:title="@string/address_tec_gurus" />
     </group>
 
 </menu>

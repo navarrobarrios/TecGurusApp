@@ -1,9 +1,9 @@
 package net.tecgurus.app.tecgurusapp.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -24,6 +24,7 @@ import net.tecgurus.app.tecgurusapp.R;
 import net.tecgurus.app.tecgurusapp.adapters.UserAdapter;
 import net.tecgurus.app.tecgurusapp.db.beans.UserBean;
 import net.tecgurus.app.tecgurusapp.db.helpers.UserHelper;
+import net.tecgurus.app.tecgurusapp.services.TimerService;
 
 import java.util.List;
 
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity
             Picasso.get()
                     .load("https://yt3.ggpht.com/-r3LX4YqxsZQ/AAAAAAAAAAI/AAAAAAAAAAA/rq7roIAaD1I/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg")
                     .into(logo);
+
+        Intent serviceIntent = new Intent(getApplicationContext(), TimerService.class);
+        startService(serviceIntent);
     }
 
     @Override
@@ -141,6 +145,38 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_map:
                 Intent mapActivity = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(mapActivity);
+                mNavigationView.setCheckedItem(R.id.nav_home);
+                drawer.closeDrawer(Gravity.START);
+                return false;
+            case R.id.nav_web_services:
+                Intent soapServiceActivityIntent = new Intent(getApplicationContext(), WebServices.class);
+                startActivity(soapServiceActivityIntent);
+                mNavigationView.setCheckedItem(R.id.nav_home);
+                drawer.closeDrawer(Gravity.START);
+                return false;
+            case R.id.nav_go_to_tec_gurus:
+
+                double startLatitude = 20.6674736;
+                double startLongitude = -103.3710259;
+
+                String uriBegin = "geo:" + startLatitude + "," + startLongitude;
+                String query = "" + startLatitude + "," + startLongitude + "(Tec Gurus)";
+                String encodedQuery = Uri.encode(query);
+                String uriString = uriBegin + "?q=" + encodedQuery;
+                Uri uri = Uri.parse(uriString);
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+                Uri gmmIntentUri = Uri.parse("geo:" + startLatitude + "," + startLongitude);
+                /*Google Navigation*/
+//                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + startLatitude + "," + startLongitude);
+                /*Street View*/
+//                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + startLatitude + "," + startLongitude);
+
+//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                mapIntent.setPackage("com.google.android.apps.maps");
+//                startActivity(mapIntent);
+
                 mNavigationView.setCheckedItem(R.id.nav_home);
                 drawer.closeDrawer(Gravity.START);
                 return false;
